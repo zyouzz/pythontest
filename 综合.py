@@ -501,7 +501,7 @@ fig.savefig(r'C:\Users\Esri\Desktop\top100.png', dpi=100)
 # _user = "jiangbh@esrichina.com.cn"
 # smtpserver='smtp.esrichina.com.cn'
 # _from = '江宝骅<jiangbh@esrichina.com.cn>'
-# _pwd = "251276jbh~"
+# _pwd = "*********"
 # #----如果发送多个人用英文半角逗号隔开---
 # _to = '江宝骅<jiangbh@esrichina.com.cn>'
 #
