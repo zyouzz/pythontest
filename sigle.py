@@ -10,21 +10,22 @@ import socket
 socket.setdefaulttimeout(30)
 header = {'Host': 'cs.lianjia.com','User-Agent': 'Mozilla/5.0 (Windows NT 6.1; rv:26.0) Gecko/20100101 Firefox/26.0','Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Connection': 'keep-alive'}
 paath = 'C://Users//Esri//Desktop//网址1.txt'
-log = open(paath.decode('utf-8'), 'w')
-log.close()
+# log = open(paath.decode('utf-8'), 'w')
+# log.close()
 id=0
 # uurl=[]
-for num in range(1,20):
+for num in range(93,901):
     # print '正在爬取第%d页'%num
-    if num!=0:
-        url = 'http://cs.lianjia.com/ershoufang/pg'+str(num)+'co32/'
+    if num!=1:
+        url = 'http://bj.lianjia.com/ershoufang/pg'+str(num)
 
     else:
-        url = 'http://cs.lianjia.com/ershoufang/co32/'
+        url = 'http://bj.lianjia.com/ershoufang/'
     # try:
     print url
     session = requests.session()
-    req = urllib.urlopen(url,proxies={"http":"http://154.127.52.247:8080"})
+    # req = urllib.urlopen(url)
+    req = urllib.urlopen(url, proxies={"http": "http://139.224.237.33:8888"})
     # con = urllib2.urlopen(req)
     # 对con这个对象调用read()方法，返回的是html页面，也就是有html标签的纯文本
     doc = req.read()
@@ -38,7 +39,7 @@ for num in range(1,20):
         # uurl.append(houseurl)
         id+=1
         print '正在爬取第%d页' % num+str(id)+'条'
-        log = open(paath.decode('utf-8'), 'a')
+        log = open(paath.decode('utf-8'), 'a+')
         log.writelines(houseurl+'\n')
             # id+=1
             # print '正在爬取第%d页'% num+str(id)+'条'+' '+'%s的详情信息'%houseurl

@@ -14,14 +14,14 @@ def getip(url,processi):
     for pa in url:
         try:
             driver=webdriver.PhantomJS(executable_path=r"D:\Python27\phantomjs-2.1.1-windows\bin\phantomjs")
-            link='http://support.esri.com/Products/Desktop/arcgis-desktop/arcmap/10-5#knowledge-base/technicalarticle?id=0000'+str(pa+10695)
+            link='http://support.esri.com/technical-article/0000'+str(pa+12719)
             driver.get(link)
             # print driver.page_source
-            time.sleep(15)
-            print 'http://support.esri.com/Products/Desktop/arcgis-desktop/arcmap/10-5#knowledge-base/technicalarticle?id=0000'+str(pa+10695)
+            # time.sleep(15)
+            print 'http://support.esri.com/technical-article/0000'+str(pa+12719)
             bfcontent=BeautifulSoup(driver.page_source,'lxml')
             driver.close()
-            ids=pa+10695
+            ids=pa+12719
             ss=open('C:\Users\Esri\Desktop\%d.txt'%ids,'w')
             ss.write(bfcontent.encode('utf-8'))
             ss.close()
@@ -45,9 +45,9 @@ def fenreneu(changdu,jiange):
     return li
 if __name__=='__main__':
     fin_save_list = []
-    p = Pool(1)  # 设置进程池
+    p = Pool(5)  # 设置进程池
     # result = []
-    url=fenreneu(3,1)# 多进程结果列表
+    url=fenreneu(5,1)# 多进程结果列表
     for i in range(len(url)):
         p.apply_async(getip, args=(url[i],i))
         # print result

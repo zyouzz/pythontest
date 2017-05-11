@@ -8,17 +8,19 @@ import speech_recognition as sr
 from pydub import AudioSegment
 import time
 import datetime
-##获取音频时长
-# f = wave.open(r"C:\Users\Esri\Desktop\ArcGIS Enterprise- An Introduction.wav","rb")
-# timelength=int(f.getparams()[3]/f.getparams()[2])
+#获取音频时长
+import wave
+# ffff='D:/mapping2.wav'
+# fii = wave.open(ffff,'r')
+# timelength=int(fii.getparams()[3]/fii.getparams()[2])
 # print(int(5.6))
 #
 # ##音频分割输出
-# readaudio=AudioSegment.from_wav(r'C:\Users\Esri\Desktop\ArcGIS Enterprise- An Introduction.wav')
-# kn=int(timelength/417)+1
-# for i in range(kn):
-#      readaudio[i*417*1000:((i+1)*417+2)*1000].export(r'C:\Users\Esri\Desktop\speech\AE%d.wav'%(i+1), format="wav")
-#获取文件夹下的音频文件名
+# readaudio=AudioSegment.from_wav(ffff)
+# kn=int(timelength/8)+1
+# for i in range(8):
+#      readaudio[i*kn*1000:((i+1)*kn+2)*1000].export(r'C:\Users\Esri\Desktop\speech\m2d%d.wav'%(i+1), format="wav")
+# 获取文件夹下的音频文件名
 starttime = datetime.datetime.now()
 i = 1
 for name in os.listdir(r'C:\Users\Esri\Desktop\speech'):

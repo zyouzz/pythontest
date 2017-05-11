@@ -19,7 +19,7 @@ def getListProxies():
         page.encoding = page.apparent_encoding
         soup = BeautifulSoup(page.text, 'lxml')
         taglist = soup.find_all('tr', attrs={'class': re.compile("(odd)|()")})
-        if (len(proxyList) >= 30):
+        if (len(proxyList) >= 10):
             break
         for trtag in taglist:
             tdlist = trtag.find_all('td')
@@ -30,7 +30,7 @@ def getListProxies():
                 response = session.get(url, proxies=proxy, timeout=10)
                 print proxy
                 proxyList.append(proxy)
-                if(len(proxyList) >= 30):
+                if(len(proxyList) >= 10):
                     break
 
             except Exception, e:
@@ -44,9 +44,9 @@ gps=getListProxies()
 print getListProxies()
 paath1 = 'C://Users//Esri//Desktop//网址.txt'
 log = open(paath1.decode('utf-8'), 'r').read()
-id=651
+id=0
 paath = 'C://Users//Esri//Desktop//原始数据2.txt'
-for wz in log.split('\n')[178:]:
+for wz in log.split('\n'):
     print wz
     for pp in gps:
         try:
@@ -152,7 +152,7 @@ for wz in log.split('\n')[178:]:
                     '</li>', '')
                 # print fbbj
                 id += 1
-                file = open(paath.decode('utf-8'), 'a')
+                file = open(paath.decode('utf-8'), 'a+')
                 line = str(
                     id) + ',' + gpsj + ',' + jd + ',' + wd + ',' + dd + ',' + xqmz + ',' + mj + ',' + zj + ',' + jj + ',' + fwhx + ',' + szlc + ',' + hxjg + ',' + tnmj + ',' + jznx + ',' + fwcx + ',' + jzjg + ',' + zxqk + ',' + thbl + ',' + pbdt + ',' + cqnx + ',' + jyqs + ',' + scjy + ',' + fwyt + ',' + fbnx + ',' + cqss + ',' + dyxx + ',' + fbbj + ',' + wz + '\n'
                 file.write(line)
