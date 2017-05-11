@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*-coding:utf-8 -*-
 __author__ = 'jiang'
-
+###在代理网站爬取代理IP，并验证IP的可用性，然后使用代理IP爬取链家信息
 import requests
 from bs4 import BeautifulSoup
 import re

@@ -1,6 +1,7 @@
 # #!/usr/bin/env python
 # # -*-coding:utf-8 -*-
 # __author__ = 'jiang'
+####先爬取链接
 import urllib
 import BeautifulSoup
 import re
