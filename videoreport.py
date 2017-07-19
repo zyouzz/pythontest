@@ -19,11 +19,11 @@ from bs4 import BeautifulSoup
 #
 # ##esrichina 优酷
 # esriy=getyouku('http://i.youku.com/esrichina','http://i.youku.com/i/UODU1ODAyODg=/videos')
-# #
 # # #
+# # # #
 # print peixun,esriy
 #
-# ##腾讯
+##腾讯
 def gettengxun(url):
     headers={'User-Agent':'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36'}
     page = requests.get(url, headers=headers).text
@@ -71,5 +71,5 @@ print weizhushou,esrit
 # # print arcgisproduction[0]
 # files = open(r'C:\Users\Esri\Desktop\arcgischanpin.txt', 'a+')
 # for i in  range(len(arcgisproduction[0])):
-#     files.write(('%s,%s,%s'%(arcgisproduction[0][i],arcgisproduction[1][i],arcgisproduction[2][i])).encode('utf-8'))
+    files.write(('%s,%s,%s'%(arcgisproduction[0][i],arcgisproduction[1][i],arcgisproduction[2][i])).encode('utf-8'))
 
