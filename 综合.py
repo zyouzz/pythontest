@@ -11,6 +11,7 @@ import re
 import urllib.parse
 import xlsxwriter
 import matplotlib.pyplot as plt
+# 注意该模块不支持中文，当出图中有中文时，需要将D:\Python3.6.1\Lib\site-packages\matplotlib\mpl-data\fonts\ttf路径中字体改为支持中文的，如微软雅黑
 import pylab as pl
 import xlrd
 import numpy as np
@@ -23,6 +24,7 @@ from email import encoders
 from email.header import Header
 from email.mime.application import MIMEApplication
 from email.mime.image import MIMEImage
+
 '''源数据清洗'''
 starttime = datetime.datetime.now()
 '''
@@ -47,7 +49,7 @@ for parent, dirnames, filenames in os.walk(rootdir):
         num = 1
         for line in input:
             if (
-                    'GET //search/ajax/search_result/search_type-questions__q-' and 'template-__page-1' and 'search_type-questions') in line:
+                            'GET //search/ajax/search_result/search_type-questions__q-' and 'template-__page-1' and 'search_type-questions') in line:
                 kw1 = line.split()[6][53:-19]
                 kw = urllib.parse.unquote(kw1).replace('_', '')
                 if '?' in kw:
@@ -65,9 +67,9 @@ for parent, dirnames, filenames in os.walk(rootdir):
         # file2 = open('C://Users//Esri//Desktop//statistics//每天搜索次数统计.txt', 'a')
         tongjiline = filedate + ',' + str(num) + '\n'
         tongjilist.append(tongjiline)
-    # (tongjilist)
-    # print(loglist)
-    # file2 = file2.write(line2)
+        # (tongjilist)
+        # print(loglist)
+        # file2 = file2.write(line2)
 
 ###创建文本并写入数据表头
 log = open('C://Users//Esri//Desktop//statistics//原始数据.txt', 'w', encoding='utf-8')
@@ -170,17 +172,17 @@ file3.close()
 file4.close()
 
 '''搜索关键词Top50统计在线版'''
-top50=open(r'C://Users//Esri//Desktop//statistics//关键词top100.txt',encoding='utf-8').readlines()
+top50 = open(r'C://Users//Esri//Desktop//statistics//关键词top100.txt', encoding='utf-8').readlines()
 print(top50)
-da1=[]
-fre1=[]
+da1 = []
+fre1 = []
 for tx50 in top50:
     da1.append(tx50.split(',')[0])
-    fre1.append(tx50.split(',')[1].replace('\n',''))
-file2=open(r'C:\Hexo\source\html\ArcGIS知乎站内搜索关键词统计Top50.html',encoding='utf-8').readlines()
-file2[31]=str(da1[:51])+','+'\n'
-file2[33]=str(fre1[:51])+','+'\n'
-file1=open(r'C:\Hexo\source\html\ArcGIS知乎站内搜索关键词统计Top50.html','w+',encoding='utf-8')
+    fre1.append(tx50.split(',')[1].replace('\n', ''))
+file2 = open(r'C:\Hexo\source\html\ArcGIS知乎站内搜索关键词统计Top50.html', encoding='utf-8').readlines()
+file2[31] = str(da1[:51]) + ',' + '\n'
+file2[33] = str(fre1[:51]) + ',' + '\n'
+file1 = open(r'C:\Hexo\source\html\ArcGIS知乎站内搜索关键词统计Top50.html', 'w+', encoding='utf-8')
 file1.writelines(file2)
 file1.close()
 
@@ -190,7 +192,7 @@ y = y[:20]
 i = 1
 x1 = []
 for i in range(1, len(x) + 1):
-    x1.append(int(i)+5)
+    x1.append(int(i) + 5)
 DataX = tuple(x1)
 # print(type(DataX))
 DataY = tuple(y)
@@ -200,7 +202,8 @@ fig1.set_size_inches(30, 15)
 # plt.xlim()
 rects = plt.bar(left=DataX, height=DataY, width=0.5, align="center", yerr=0.000001, facecolor='lightskyblue',
                 edgecolor='white')
-plt.plot(DataX,DataY)
+plt.plot(DataX, DataY)
+
 
 def autolabel(rects):
     for rect in rects:
@@ -285,67 +288,67 @@ DataY = tuple(y)
 # plt.show()
 
 '''每天统计成图在线版'''
-dayst=open(r'C://Users//Esri//Desktop//statistics//每天搜索次数统计.txt',encoding='utf-8').readlines()
+dayst = open(r'C://Users//Esri//Desktop//statistics//每天搜索次数统计.txt', encoding='utf-8').readlines()
 print(dayst)
-da=[]
-fre=[]
+da = []
+fre = []
 for tx1 in dayst:
     da.append(tx1.split(',')[0])
-    fre.append(tx1.split(',')[1].replace('\n',''))
-file=open(r'C:\Hexo\source\html\ArcGIS知乎每天站内搜索统计.html',encoding='utf-8').readlines()
-file[31]=str(da)+','+'\n'
-file[33]=str(fre)+','+'\n'
-file1=open(r'C:\Hexo\source\html\ArcGIS知乎每天站内搜索统计.html','w+',encoding='utf-8')
+    fre.append(tx1.split(',')[1].replace('\n', ''))
+file = open(r'C:\Hexo\source\html\ArcGIS知乎每天站内搜索统计.html', encoding='utf-8').readlines()
+file[31] = str(da) + ',' + '\n'
+file[33] = str(fre) + ',' + '\n'
+file1 = open(r'C:\Hexo\source\html\ArcGIS知乎每天站内搜索统计.html', 'w+', encoding='utf-8')
 file1.writelines(file)
 file1.close()
 '''自动git push'''
 
 '''按月份统计汇总'''
-openutj = open('C://Users//Esri//Desktop//statistics//uheadtongji.txt',"r",encoding='utf-8')
-umonth=[]
+openutj = open('C://Users//Esri//Desktop//statistics//uheadtongji.txt', "r", encoding='utf-8')
+umonth = []
 for line5 in openutj.read().split('\n'):
     umonth.append(line5[:7])
-#print(year)
-#print(month)
+# print(year)
+# print(month)
 openutj.close()
 outfile7 = open('C://Users//Esri//Desktop//statistics//每月搜索次数统计.txt', "w", encoding='utf-8')
-headms='月份'+','+'次数'+'\n'
+headms = '月份' + ',' + '次数' + '\n'
 outfile7.write(headms)
 outfile7.close()
-uyemon=[]
+uyemon = []
 for mon in umonth:
-    #print(mon)
+    # print(mon)
     openutj1 = open('C://Users//Esri//Desktop//statistics//uheadtongji.txt', "r", encoding='utf-8')
-    summ=0
+    summ = 0
     for line6 in openutj1.read().split('\n'):
-        monn=line6[:7]
-        if monn==mon:
-            summ+=int(line6[11:])
+        monn = line6[:7]
+        if monn == mon:
+            summ += int(line6[11:])
     uyemon.append(summ)
-#print(uyemon)
-month=[]
+# print(uyemon)
+month = []
 for dmonth in umonth:
     if dmonth not in month:
         month.append(dmonth)
-#print(month)
-yemon=[]
+# print(month)
+yemon = []
 for dyemon in uyemon:
     if dyemon not in yemon:
         yemon.append(dyemon)
-#print(yemon)
+# print(yemon)
 openutj1.close()
-i22=0
-sousuo=[]
+i22 = 0
+sousuo = []
 for c22 in month:
-    i22+=1
-    if i22!=len(month):
-        sousuo.append(str(c22)+','+str(yemon[i22-1])+'\n')
+    i22 += 1
+    if i22 != len(month):
+        sousuo.append(str(c22) + ',' + str(yemon[i22 - 1]) + '\n')
     else:
         sousuo.append(str(c22) + ',' + str(yemon[i22 - 1]))
-#print(sousuo)
-openmeiyue=open('C://Users//Esri//Desktop//statistics//每月搜索次数统计.txt', "a", encoding='utf-8')
+# print(sousuo)
+openmeiyue = open('C://Users//Esri//Desktop//statistics//每月搜索次数统计.txt', "a", encoding='utf-8')
 openmeiyue.writelines(sousuo)
-#print(sousuo)
+# print(sousuo)
 openmeiyue.close()
 
 '''每天统计折点图'''
@@ -360,27 +363,27 @@ plt.xlabel('日期(' + startday + '+)', fontsize=23)
 plt.ylabel('次数', fontsize=23)
 plt.plot(x1, y, 'b*')  # use pylab to plot x and y
 plt.plot(x1, y, 'r')
-for i, (_x, _y,_z) in enumerate(zip(x1, y,y)):
+for i, (_x, _y, _z) in enumerate(zip(x1, y, y)):
     plt.text(_x, _y, _z, color='red', fontsize=25)
 savets = "C:/Users/Esri/Desktop/" + re.sub(':', '', str(datetime.datetime.now())) + "ts.png"
 fig3.savefig(savets, dpi=100)
 # pl.show()  # show the plot on the screen
 
 '''每月统计折点图'''
-openmonth=open('C://Users//Esri//Desktop//statistics//每月搜索次数统计.txt', 'r', encoding='utf-8')
-realmonth=[]
-monsta=[]
+openmonth = open('C://Users//Esri//Desktop//statistics//每月搜索次数统计.txt', 'r', encoding='utf-8')
+realmonth = []
+monsta = []
 for monybeta in openmonth:
-    mony=monybeta.replace('\n','').split(',')[1]
-    if mony!='次数':
+    mony = monybeta.replace('\n', '').split(',')[1]
+    if mony != '次数':
         monsta.append(mony)
         realmonth.append(monybeta[5:7])
-mons=[]
-#print(len(monsta))
-for monx in range(0,len(monsta)):
-    mons.append(monx+1)
-#print(monsta)
-#print(mons)
+mons = []
+# print(len(monsta))
+for monx in range(0, len(monsta)):
+    mons.append(monx + 1)
+# print(monsta)
+# print(mons)
 fig4 = plt.figure()
 fig4.set_size_inches(30, 10.5)
 plt.title(
@@ -390,15 +393,17 @@ plt.xticks(fontsize=20)
 plt.yticks(fontsize=20)
 plt.xlabel('月份(' + str(startday)[5:7] + '月份开始--)', fontsize=23)
 plt.ylabel('次数', fontsize=23)
-plt.plot(mons, monsta, 'bo',mons, monsta, 'r')  # use pylab to plot x and y
-#plt.plot(mons, monsta, 'r')
+plt.plot(mons, monsta, 'bo', mons, monsta, 'r')  # use pylab to plot x and y
+# plt.plot(mons, monsta, 'r')
 plt.xticks(mons, realmonth, fontsize=20)
-for i, (_x, _y,_z) in enumerate(zip(mons, monsta,monsta)):
+for i, (_x, _y, _z) in enumerate(zip(mons, monsta, monsta)):
     plt.text(_x, _y, _z, color='red', fontsize=25)
 savemonth = "C:/Users/Esri/Desktop/" + re.sub(':', '', str(datetime.datetime.now())) + "month.png"
 fig4.savefig(savemonth, dpi=100)
 
 '''txt转xlsx'''
+
+
 def txt_to_xlsx(txtpath):
     exc = xlsxwriter.Workbook(
         'C://Users//Esri//Desktop//statistics//' + txtpath.split('//')[-1].split('.')[0] + '.xlsx')
@@ -437,60 +442,63 @@ def txt_to_xlsx(txtpath):
     # print('====================================='+'\n'+'导入文本信息'+'\n'+'=====================================')
     # print('该文本共有%d行' % txtline + '\n' + '有%d行为空' % spaceline + '\n' + '空行行数分别为:' + re.sub('{|}', '', str(storesp)))
 
+
 txt_to_xlsx('C://Users//Esri//Desktop//statistics//爬取的数据源.txt')
 txt_to_xlsx('C://Users//Esri//Desktop//statistics//每天搜索次数统计.txt')
 txt_to_xlsx('C://Users//Esri//Desktop//statistics//每月搜索次数统计.txt')
 txt_to_xlsx('C://Users//Esri//Desktop//statistics//关键词top100.txt')
 
 '''Top100成图'''
-top100=xlrd.open_workbook(r'C:\Users\Esri\Desktop\statistics\关键词top100.xlsx')
+top100 = xlrd.open_workbook(r'C:\Users\Esri\Desktop\statistics\关键词top100.xlsx')
 try:
-    topsheet=top100.sheet_by_name('Sheet1')
+    topsheet = top100.sheet_by_name('Sheet1')
 except:
     print('no sheet in xlsx named Sheet1')
-nrows=topsheet.nrows
-ncols=topsheet.ncols
-col1=[]
-col2=[]
-filters=['for','not','to','be','the','is','in','a','create','no']
-num=1
-for i in range(1,nrows):
-    row_data=topsheet.row_values(i)
+nrows = topsheet.nrows
+ncols = topsheet.ncols
+col1 = []
+col2 = []
+filters = ['for', 'not', 'to', 'be', 'the', 'is', 'in', 'a', 'create', 'no']
+num = 1
+for i in range(1, nrows):
+    row_data = topsheet.row_values(i)
     if row_data[0] not in filters:
         col1.append(row_data[0])
         col2.append(int(row_data[1]))
-        num+=1
+        num += 1
 print(num)
 print(col1)
 print(col2)
 ##为了方便展示，翻转一下关键词和次数，
-keyw=tuple(reversed(col1))
-col3=[]
+keyw = tuple(reversed(col1))
+col3 = []
 ##翻转函数reversed()结果是一个迭代，需要重新创建list
 for sornew in reversed(col2):
     col3.append(sornew)
-data=np.array(col3)
-x=np.arange(len(col1))
-fig=plt.figure()
+data = np.array(col3)
+x = np.arange(len(col1))
+fig = plt.figure()
 fig.set_size_inches(20, 30)
-ax1=plt.axes([0.07,0.03,0.9,0.93])
-area=ax1.barh(x,data,align='center',color='g',alpha=0.5)
-plt.ylim(-1,num)
-plt.xlabel('data',size=18,color='k')
+ax1 = plt.axes([0.07, 0.03, 0.9, 0.93])
+area = ax1.barh(x, data, align='center', color='g', alpha=0.5)
+plt.ylim(-1, num)
+plt.xlabel('data', size=18, color='k')
 ax1.set_yticks(x)
 ax1.set_yticklabels(keyw)
 plt.xlabel('次数', fontsize=23)
 plt.ylabel('关键词', fontsize=23)
-plt.title('ArcGIS知乎站内搜索关键词统计',fontsize=30)
+plt.title('ArcGIS知乎站内搜索关键词统计', fontsize=30)
+
+
 ###加标注
 def autolabel(area):
     numm = 1
     for rect1 in area:
         height = rect1.get_width()
         print(int(height))
-        #plt.text(rect1.get_x() + rect1.get_width() / 3., 1.01 * height, '%s' % int(height), color='red', fontsize=25)
-        plt.text(height+1,  numm-1, '%s' % int(height), color='red')
-        numm+=1
+        # plt.text(rect1.get_x() + rect1.get_width() / 3., 1.01 * height, '%s' % int(height), color='red', fontsize=25)
+        plt.text(height + 1, numm - 1, '%s' % int(height), color='red')
+        numm += 1
 
 
 autolabel(area)

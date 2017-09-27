@@ -160,7 +160,7 @@ if __name__ == '__main__':
     sf.write(loghead)  # 写文件头
     sf.close()
     i=0
-    for ips in soucrdata[1:len(soucrdata) - 1]:
+    for ips in soucrdata[6058:len(soucrdata) - 1]:
         ip = ips.split(',')[0]
         # print ip
         date = ips.split(',')[1].split('/')
