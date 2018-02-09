@@ -3,6 +3,9 @@
 __author__ = 'jiang'
 from bs4 import BeautifulSoup
 import requests
+import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
 session = requests.session()
 user_agent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5)'
 headers = {'User-Agent': user_agent}
@@ -16,8 +19,8 @@ def dowloadimg(imageUrl,filePath):
     print filePath
     with open(filePath, "wb") as code:
         code.write(r.content)
-for pageno in range(19):
-    url="http://zhihu.esrichina.com.cn/question/id-15153__sort-DESC__page-"+str(pageno+1)
+for pageno in range(9):
+    url="http://zhihu.esrichina.com.cn/question/id-19341__sort-DESC__page-"+str(pageno+1)
     redetail=getimg(url)
     ree=redetail.find_all('div',"aw-item")[1:]
     for dure in ree:
@@ -28,13 +31,17 @@ for pageno in range(19):
             img = dure.find_all('div', "aw-upload-img-list")
             for pinci in img:
                 if pinci.find_all('a'):
+                    n=1
                     for ii in pinci.find_all('a'):
                         print name
                         print huitime
                         imgurl=ii.get('href')
                         print imgurl
-                        filezh=open('c:/Users/Esri/Desktop/zhihuimg/zhihu.txt','a+')
+                        paath1=paath+str(n)+"."+imgurl.split('.')[-1]
+                        dowloadimg(imgurl, paath1)
+                        filezh=open(r'c:/Users/Esri/Desktop/zhihuimg/zhihu.txt','a+')
                         filezh.write('{},{},{},{}\n'.format(name,huitime,imgurl,url))
+                        n+=1
 
 
 
